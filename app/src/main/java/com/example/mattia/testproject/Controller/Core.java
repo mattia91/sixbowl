@@ -23,9 +23,8 @@ public class Core {
 
             Bowl last_bowl = move_seeds(active_player, player, bowl);
 
-            check_rules(active_player,player,bowl,turn);
+            check_rules(active_player,player,bowl,turn,last_bowl);
 
-            end();
         }
 
         return null;
@@ -45,13 +44,29 @@ public class Core {
         return null;
     }
 
-    private void check_rules(Player active_player, Player player, Bowl bowl, int turn){
+    private void check_rules(Player active_player, Player player, Bowl bowl, int turn, Bowl last_bowl){
+
+        if(last_bowl != null){
+
+            if(!active_player.getBowls().contains(last_bowl)){
+                //prima regola
+                if(last_bowl.getNum_seeds() == 1){
+                    //ruba tutti i semi nel corrispondente
+                }
+
+            }
+        }
+
+
+        //else
 
     }
 
-    private void end(){
+    public boolean end(){
         //TODO controlla i vasi del giocatore attivo, se sono vuoti procedura di fine
 
         //aggiorna le statistiche
+
+        return false;
     }
 }
