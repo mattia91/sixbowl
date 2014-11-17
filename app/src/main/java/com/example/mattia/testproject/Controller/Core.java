@@ -40,7 +40,7 @@ public class Core {
 
 
     private Bowl move_seeds(Player active_player, Player player, Bowl bowl){
-
+        //salta il tray dell'avversario, ritorna null se finisci sul tuo tray altrimeni 'ultimo bowl
         return null;
     }
 
@@ -55,10 +55,13 @@ public class Core {
                 }
 
             }
+
+            if(turn == Constant.number_player){
+                turn = 1;
+            }
+            else turn++;
         }
 
-
-        //else
 
     }
 
