@@ -14,4 +14,8 @@ public class Bowl {
     public void setNum_seeds(int num_seeds) {
         this.num_seeds = num_seeds;
     }
+
+    public void increment(int amount){
+        this.num_seeds += amount;
+    }
 }

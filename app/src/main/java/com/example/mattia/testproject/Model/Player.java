@@ -33,4 +33,8 @@ public class Player {
     public void setTray(Tray tray) {
         this.tray = tray;
     }
+
+    public void increment_tray(int amount){
+        this.tray.setSeeds(this.tray.getSeeds()+amount);
+    }
 }
