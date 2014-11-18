@@ -4,34 +4,28 @@ import com.example.mattia.testproject.Model.Bowl;
 import com.example.mattia.testproject.Model.Constant;
 import com.example.mattia.testproject.Model.Player;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by mattia on 17/11/2014.
  */
 public class Core {
 
-    public Player[] getPlayers() {
-        return players;
-    }
 
-    public void setPlayers(Player[] players) {
-        this.players = players;
-    }
 
-    public Player getActive() {
-        return active;
-    }
-
-    public void setActive(Player active) {
-        this.active = active;
-    }
-
-    private Player players[];
+    private ArrayList<Player> players = new ArrayList<Player>();
+    //private Player players[];
     private Player active;
 
     public Core(){
-        players = new Player[Constant.number_player];
-        active = players[0];
+        //players = new Player[Constant.number_player];
+
+        for( int e = 0 ; e < Constant.number_player ; e++ ){
+            players.add(new Player());
+        }
+
+        active = players.get(0);
     }
 
     public Bowl user_action(Bowl bowl){
@@ -69,11 +63,11 @@ public class Core {
                 //determino chi è inattivo, mi serve per assegnare alla variabile filling_bowls il giocatore/i in uso
                 Player opponent = new Player();
                 for( int i = 0 ; i < Constant.number_player ; i++ ){
-                    if( players[i].equals(active) && i + 1 < Constant.number_player){
-                        opponent = players[i+1];
+                    if( players.get(i).equals(active) && i + 1 < Constant.number_player){
+                        opponent = players.get(i+1);
                     }
                     else{
-                        opponent = players[0];
+                        opponent = players.get(0);
                     }
                 }
                 filling_bowls = opponent;
@@ -112,11 +106,11 @@ public class Core {
                     //determino chi è inattivo
                     Player opponent = new Player();
                     for( int i = 0 ; i < Constant.number_player ; i++ ){
-                        if( players[i].equals(active) && i + 1 < Constant.number_player){
-                            opponent = players[i+1];
+                        if( players.get(i).equals(active) && i + 1 < Constant.number_player){
+                            opponent = players.get(i+1);
                         }
                         else{
-                            opponent = players[0];
+                            opponent = players.get(0);
                         }
                     }
                     //aggiorno il mio tray
@@ -141,4 +135,22 @@ public class Core {
 
         return false;
     }
+
+
+//GETTERS AND SETTERS
+    public ArrayList<Player> getPlayers() {
+    return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+    public Player getActive() {
+        return active;
+    }
+
+    public void setActive(Player active) {
+        this.active = active;
+    }
+
 }

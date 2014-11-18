@@ -9,10 +9,12 @@ public class Player {
 
     private ArrayList<Bowl> bowls= new ArrayList<Bowl>();
     private Tray tray;
+    private String name = new String();
+
 
    public Player(){
 
-       for(int i=0;i<Constant.num_bowls;i++) {
+       for(int i = 0 ; i < Constant.num_bowls ; i++) {
           bowls.add(new Bowl());
        }
        tray=new Tray();
