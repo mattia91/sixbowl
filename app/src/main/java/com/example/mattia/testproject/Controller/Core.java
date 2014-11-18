@@ -124,8 +124,11 @@ public class Core {
                     active.increment_tray( opponent.getBowls().get(Constant.num_bowls - 1 - bowls_pointer).getNum_seeds() );
                     //imposto la bowl da cui ho rubato a zero semi
                     opponent.getBowls().get(Constant.num_bowls - 1 - bowls_pointer).setNum_seeds(0);
+                    //è ora di cambiare il turno
+                    active = opponent;
                 }
             }
+
         }
     }
 
