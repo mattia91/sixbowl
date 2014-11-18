@@ -4,10 +4,27 @@ import com.example.mattia.testproject.Model.Bowl;
 import com.example.mattia.testproject.Model.Constant;
 import com.example.mattia.testproject.Model.Player;
 
+
 /**
  * Created by mattia on 17/11/2014.
  */
 public class Core {
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+
+    public Player getActive() {
+        return active;
+    }
+
+    public void setActive(Player active) {
+        this.active = active;
+    }
 
     private Player players[];
     private Player active;
