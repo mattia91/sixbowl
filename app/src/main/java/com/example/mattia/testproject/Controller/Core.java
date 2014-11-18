@@ -44,7 +44,7 @@ public class Core {
         int seeds = bowl.getNum_seeds();
         //azzeriamo il numero di semi nel vaso toccato, come da regole
         bowl.setNum_seeds(0);
-        //salvo la posizione (come intero) del vaso che ho toccato sullo schermo
+        //salvo la posizione (come intero) del vaso che ho selezionato
         int bowls_pointer = 0;
         for ( Bowl my_bowl : active.getBowls() ){
             if( my_bowl.equals(bowl) ){
@@ -53,33 +53,40 @@ public class Core {
         }
         //creo un oggetto giocatore che varia in base a dove mi trovo con la semina, serve per non mettere semi nel tray dell'avversario (eseguirò un controllo)
         Player filling_bowls = active;
+
         //parte il ciclo di semina
         for( int e = 0 ; e < seeds ; e++ ){
+
+            bowls_pointer++;
+
             //condizione al contorno, player attivo
-            if( ++bowls_pointer == Constant.num_bowls && filling_bowls.equals(active) ){
-                bowls_pointer = 0;
+            if( bowls_pointer  == Constant.num_bowls && filling_bowls.equals(active) ){
+                bowls_pointer = -1;//questo perché voglio che alla prossima iterazione del ciclo, lui parta dal vaso numro zero!! (nota che all'inizio di ogni tierazione incremento bowlspointer)
                 active.increment_tray(1);
 
                 //determino chi è inattivo, mi serve per assegnare alla variabile filling_bowls il giocatore/i in uso
-                Player opponent = new Player();
-                for( int i = 0 ; i < Constant.number_player ; i++ ){
-                    if( players.get(i).equals(active) && i + 1 < Constant.number_player){
-                        opponent = players.get(i+1);
-                    }
-                    else{
-                        opponent = players.get(0);
+                Player opponent = active;
+                for( int i = 1 ; i < Constant.number_player ; i++ ){
+                    if( players.get(i - 1).equals(active)){
+                        if( i == Constant.number_player ){
+                            opponent = players.get(0);
+                        }
+                        else{
+                            opponent = players.get(i);
+                        }
                     }
                 }
                 filling_bowls = opponent;
+
                 //entrando in questo if mi trovo ad essere nel mio tray. Voglio che venga passato null.
                 return_bowl = null;
             }
             //condizione al contorno, player non attivo
-            else if( bowls_pointer == Constant.num_bowls && !filling_bowls.equals(active)){
+            else if( bowls_pointer  == Constant.num_bowls && !filling_bowls.equals(active)){
                 bowls_pointer = 0;
-                //metto un seme nel vaso corrente
-                filling_bowls.getBowls().get(bowls_pointer).increment(1);
+                //metto un seme nel vaso corrente, lo 0 mio, poiché ho saltato il tray dell'opponente come da regolamento
                 filling_bowls = active;
+                filling_bowls.getBowls().get(bowls_pointer).increment(1);
                 return_bowl = filling_bowls.getBowls().get(bowls_pointer);
             }
             else {
