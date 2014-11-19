@@ -6,15 +6,12 @@ import com.example.mattia.testproject.Model.Player;
 
 import java.util.ArrayList;
 
-
-
 /**
  * Created by martino on 19/11/14.
  */
+
 public class Rules {
-
 //questa classe contiene le regole del gioco, nel caso il gioco voglia essere esteso le nuove regole vanno aggiunte qui.
-
 /*regole della versione base :
 
 - se l'ultimo seme della mia fase di semina finisce nel MIO tray, ho a disposizione un'altra mossa : keep_active()
@@ -22,8 +19,6 @@ public class Rules {
     a quello su detto, appartenente all'avversario, vanno nel MIO tray : steal_seeds()
 
  */
-
-
     public Player check_rules(Bowl last_bowl, Player active, ArrayList<Player> players, int game_mode){
 
         if( game_mode == 1){
@@ -35,8 +30,6 @@ public class Rules {
         return active;
 
     }
-
-
 
 
 //DEFINIZIONE DELLE REGOLE, UNA PER UNA
@@ -64,8 +57,6 @@ public class Rules {
 
         return active;
     }
-
-
 
     private void steal_seeds(Bowl last_bowl, Player active, ArrayList<Player> players){
 

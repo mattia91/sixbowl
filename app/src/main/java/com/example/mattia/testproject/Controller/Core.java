@@ -6,41 +6,46 @@ import com.example.mattia.testproject.Model.Player;
 
 import java.util.ArrayList;
 
-
 /**
  * Created by mattia on 17/11/2014.
  */
+
 public class Core {
 
+//OGGETTI ISTANZIATI
     private ArrayList<Player> players = new ArrayList<Player>();
     private Player active;
+    private Player last_active;
+    private Player winner;
     private Rules rules = new Rules();
-
-
-
-    //modalità di gioco, 1 indica modalità standard, si possono definire nuove regole, useremo altri numeri
+    private EndingRoutine game_over = new EndingRoutine();
+    /*possibili valori della variabile end_of_game
+      -1 gioco non concluso
+      -2 gioco concluso in pareggio
+      +n indice del giocatore nell'array che ha vinto
+     */
+    //TODO nella view viene letto end_of_game tramite il getter, se diverso da -1 la partita è terminata
+    private int end_of_game = -1;
+    /* la variabile game_mode indica la modalità di gioco,
+        1 indica modalità standard, si possono definire nuove regole,
+        usando altri numeri
+    */
     private int game_mode = 1;
 
 
-    public Core(){
-        //players = new Player[Constant.number_player];
-
-        for( int e = 0 ; e < Constant.number_player ; e++ ){
-            players.add(new Player());
-        }
-
-        active = players.get(0);
-    }
-
+//METODI PUBBLICI DELLA CLASSE
     public Bowl user_action(Bowl bowl){
         if( is_legal( bowl, active ) ){
+            last_active = active;
             Bowl last_bowl = move_seeds(bowl);
             active = rules.check_rules(last_bowl, active, players, game_mode);
+            end_of_game = game_over.gameOver(last_active, players);
         }
         return null;
     }
 
-    public Bowl move_seeds(Bowl bowl){
+//METODI PRIVATI DELLA CLASSE
+    private Bowl move_seeds(Bowl bowl){
 
         //dichiariamo subito un oggetto bowl da ritornare
         Bowl return_bowl = null;
@@ -102,52 +107,75 @@ public class Core {
         }
         return return_bowl;
     }
-
-
-
     private boolean is_legal(Bowl bowl,Player player){
         if (bowl.getNum_seeds()==0) return false;
         if (!player.getBowls().contains(bowl)) return false;
         return true;
     }
 
-    public boolean end(){
-        //TODO controlla i vasi del giocatore attivo, se sono vuoti procedura di fine
-
-        //aggiorna le statistiche
-
-        return false;
+//COSTRUTTORI
+    public Core(){
+        for( int e = 0 ; e < Constant.number_player ; e++ ){
+            players.add(new Player());
+        }
+        active = players.get(0);
     }
-
 
 //GETTERS AND SETTERS
     public ArrayList<Player> getPlayers() {
     return players;
     }
-
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
     public Player getActive() {
         return active;
     }
-
     public void setActive(Player active) {
         this.active = active;
     }
     public Rules getRules() {
         return rules;
     }
-
     public void setRules(Rules rules) {
         this.rules = rules;
     }
-
     public int getGame_mode() {
         return game_mode;
     }
-
     public void setGame_mode(int game_mode) {
         this.game_mode = game_mode;
     }
+    public void setLast_active(Player last_active) {
+        this.last_active = last_active;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
+    }
+
+    public EndingRoutine getGame_over() {
+        return game_over;
+    }
+
+    public void setGame_over(EndingRoutine game_over) {
+        this.game_over = game_over;
+    }
+
+    public int getEnd_of_game() {
+        return end_of_game;
+    }
+
+    public void setEnd_of_game(int end_of_game) {
+        this.end_of_game = end_of_game;
+    }
+    public Player getLast_active() {
+        return last_active;
+    }
+
+
 }

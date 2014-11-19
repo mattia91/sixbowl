@@ -18,6 +18,13 @@ public class RulesTest extends TestCase {
 
     public void test_check_rules( ){
 
+        /*
+            Regole testate :
+            - quando termino la semina in un mio vaso vuoto rubo tutti quelli dell'avversario e li metto nel mio tray assieme al seme che è finito nel mio vaso vuoto
+            - quando la mia semina termina nel mio tray ho un turno extra
+         */
+
+
         players.add(giocatore1);
         players.add(giocatore2);
 
