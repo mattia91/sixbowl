@@ -25,8 +25,7 @@ public class CoreTest extends TestCase {
         //iniziamo ad esempio dal mio terzo vaso, condizione iniziale tutti i vasi con 3 semi e tray vuoto
         Bowl instance_bowl = core.getActive().getBowls().get(2);
 
-        core.user_action(instance_bowl);
-
+        core.move_seeds(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
         //     3 3 3 3 3 3
@@ -63,7 +62,7 @@ public class CoreTest extends TestCase {
         instance_bowl = core.getActive().getBowls().get(3);
 
         //core.user_action(instance_bowl);
-        core.user_action(instance_bowl);
+        core.move_seeds(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
        //     3 3 3 3 3 4
@@ -99,7 +98,7 @@ public class CoreTest extends TestCase {
         instance_bowl = core.getActive().getBowls().get(3);
 
         //core.user_action(instance_bowl);
-        core.user_action(instance_bowl);
+        core.move_seeds(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
         //     3 3 3 3 3 4
@@ -134,7 +133,7 @@ public class CoreTest extends TestCase {
         instance_bowl = core.getActive().getBowls().get(3);
 
         //core.user_action(instance_bowl);
-        core.user_action(instance_bowl);
+        core.move_seeds(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
         //     3 3 3 3 3 3
@@ -174,7 +173,7 @@ public class CoreTest extends TestCase {
         core.getPlayers().get(0).getBowls().get(5).setNum_seeds(8);
         instance_bowl = core.getActive().getBowls().get(5);
 
-        core.user_action(instance_bowl);
+        core.move_seeds(instance_bowl);
 
         //eseguiamo la mossa e come risultato dobbiamo avere :
         //     4 4 4 4 4 4
@@ -186,8 +185,8 @@ public class CoreTest extends TestCase {
         assertEquals(4, core.getActive().getBowls().get(0).getNum_seeds());
         assertEquals(3, core.getActive().getBowls().get(1).getNum_seeds());
         assertEquals(3, core.getActive().getBowls().get(2).getNum_seeds());
-        assertEquals(4, core.getActive().getBowls().get(3).getNum_seeds());
-        assertEquals(4, core.getActive().getBowls().get(4).getNum_seeds());
+        assertEquals(3, core.getActive().getBowls().get(3).getNum_seeds());
+        assertEquals(3, core.getActive().getBowls().get(4).getNum_seeds());
         assertEquals(0, core.getActive().getBowls().get(5).getNum_seeds());
 
         assertEquals(1, core.getActive().getTray().getSeeds());
