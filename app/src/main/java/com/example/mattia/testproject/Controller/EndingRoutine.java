@@ -38,6 +38,7 @@ public class EndingRoutine {
                 int point = 0;
                 for(Bowl bowl : player.getBowls()){
                     point += bowl.getNum_seeds();
+                    bowl.setNum_seeds(0);
                 }
                 player.increment_tray(point);
             }
@@ -57,22 +58,23 @@ public class EndingRoutine {
 
         int winning = players.get(0).getTray().getSeeds();
         int return_value = -2;
-        boolean pare=true;  // <- ho aggiunto questa variabile
+        boolean tie = true;  // <- ho aggiunto questa variabile
 
         //controlliamo se per caso è avvenuto un pareggio fra i giocatori
         for( int e = 0; e < Constant.number_player ; e++ ){
             //se la condizione sotto si verifica non è avvenuto pareggio
             if(players.get(e).getTray().getSeeds() != winning){
-                pare=false;  // <- al posto di return = -1;  uso la nuova variabile
+                return_value = 0;
+                tie = false;  // <- al posto di return = -1;  uso la nuova variabile
             }
         }
 
         //stabiliamo il vincitore
         // 0 se vince il primo
         // 1 se vince il secondo
-        if(!pare) {  // se non ce stato pareggio entro nel ciclo e stabilisco vincitore
+        if( !tie ) {  // se non ce stato pareggio entro nel ciclo e stabilisco vincitore
             for (int e = 0; e < Constant.number_player; e++) {
-                if (players.get(e).getTray().getSeeds() >= winning) {  // qua ho modificato ho messo anche " = "; ci va per forza
+                if (players.get(e).getTray().getSeeds() > winning) {
                     winning = players.get(e).getTray().getSeeds();
                     return_value = e;
                 }
