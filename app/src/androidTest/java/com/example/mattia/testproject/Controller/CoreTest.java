@@ -10,7 +10,7 @@ public class CoreTest extends TestCase {
     Core core = new Core();
 
 
-    public void test_move_seeds(){
+    public void test_user_action(){
 
 
         /*
@@ -23,9 +23,9 @@ public class CoreTest extends TestCase {
 
 
         //iniziamo ad esempio dal mio terzo vaso, condizione iniziale tutti i vasi con 3 semi e tray vuoto
-        Bowl instance_bowl = core.getActive().getBowls().get(2);
+        Bowl instance_bowl = core.getLast_active().getBowls().get(2);
 
-        core.move_seeds(instance_bowl);
+        core.user_action(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
         //     3 3 3 3 3 3
@@ -34,14 +34,14 @@ public class CoreTest extends TestCase {
         //verifichiamo
 
         //player attivo
-        assertEquals(3, core.getActive().getBowls().get(0).getNum_seeds());
-        assertEquals(3, core.getActive().getBowls().get(1).getNum_seeds());
-        assertEquals(0, core.getActive().getBowls().get(2).getNum_seeds());
-        assertEquals(4, core.getActive().getBowls().get(3).getNum_seeds());
-        assertEquals(4, core.getActive().getBowls().get(4).getNum_seeds());
-        assertEquals(4, core.getActive().getBowls().get(5).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(0).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(1).getNum_seeds());
+        assertEquals(0, core.getLast_active().getBowls().get(2).getNum_seeds());
+        assertEquals(4, core.getLast_active().getBowls().get(3).getNum_seeds());
+        assertEquals(4, core.getLast_active().getBowls().get(4).getNum_seeds());
+        assertEquals(4, core.getLast_active().getBowls().get(5).getNum_seeds());
 
-        assertEquals(0, core.getActive().getTray().getSeeds());
+        assertEquals(0, core.getLast_active().getTray().getSeeds());
 
         //opponente (non attivo)
         assertEquals(3, core.getPlayers().get(1).getBowls().get(0).getNum_seeds());
@@ -59,10 +59,10 @@ public class CoreTest extends TestCase {
 
         //reimpostiamo il giocatore attivo come prima
         core.setActive(core.getPlayers().get(0));
-        instance_bowl = core.getActive().getBowls().get(3);
+        instance_bowl = core.getLast_active().getBowls().get(3);
 
         //core.user_action(instance_bowl);
-        core.move_seeds(instance_bowl);
+        core.user_action(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
        //     3 3 3 3 3 4
@@ -71,14 +71,14 @@ public class CoreTest extends TestCase {
         //verifichiamo
 
         //player attivo
-        assertEquals(3, core.getActive().getBowls().get(0).getNum_seeds());
-        assertEquals(3, core.getActive().getBowls().get(1).getNum_seeds());
-        assertEquals(0, core.getActive().getBowls().get(2).getNum_seeds());
-        assertEquals(0, core.getActive().getBowls().get(3).getNum_seeds());
-        assertEquals(5, core.getActive().getBowls().get(4).getNum_seeds());
-        assertEquals(5, core.getActive().getBowls().get(5).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(0).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(1).getNum_seeds());
+        assertEquals(0, core.getLast_active().getBowls().get(2).getNum_seeds());
+        assertEquals(0, core.getLast_active().getBowls().get(3).getNum_seeds());
+        assertEquals(5, core.getLast_active().getBowls().get(4).getNum_seeds());
+        assertEquals(5, core.getLast_active().getBowls().get(5).getNum_seeds());
 
-        assertEquals(1, core.getActive().getTray().getSeeds());
+        assertEquals(1, core.getLast_active().getTray().getSeeds());
 
         //opponente (non attivo)
         assertEquals(4, core.getPlayers().get(1).getBowls().get(0).getNum_seeds());
@@ -95,10 +95,10 @@ public class CoreTest extends TestCase {
 
         //reimpostiamo il giocatore attivo come prima, testiamo ora che non accada nulla se il bowl passato contiene ZERO semi
         core.setActive(core.getPlayers().get(0));
-        instance_bowl = core.getActive().getBowls().get(3);
+        instance_bowl = core.getLast_active().getBowls().get(3);
 
         //core.user_action(instance_bowl);
-        core.move_seeds(instance_bowl);
+        core.user_action(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
         //     3 3 3 3 3 4
@@ -107,14 +107,14 @@ public class CoreTest extends TestCase {
         //verifichiamo
 
         //player attivo
-        assertEquals(3, core.getActive().getBowls().get(0).getNum_seeds());
-        assertEquals(3, core.getActive().getBowls().get(1).getNum_seeds());
-        assertEquals(0, core.getActive().getBowls().get(2).getNum_seeds());
-        assertEquals(0, core.getActive().getBowls().get(3).getNum_seeds());
-        assertEquals(5, core.getActive().getBowls().get(4).getNum_seeds());
-        assertEquals(5, core.getActive().getBowls().get(5).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(0).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(1).getNum_seeds());
+        assertEquals(0, core.getLast_active().getBowls().get(2).getNum_seeds());
+        assertEquals(0, core.getLast_active().getBowls().get(3).getNum_seeds());
+        assertEquals(5, core.getLast_active().getBowls().get(4).getNum_seeds());
+        assertEquals(5, core.getLast_active().getBowls().get(5).getNum_seeds());
 
-        assertEquals(1, core.getActive().getTray().getSeeds());
+        assertEquals(1, core.getLast_active().getTray().getSeeds());
 
         //opponente (non attivo)
         assertEquals(4, core.getPlayers().get(1).getBowls().get(0).getNum_seeds());
@@ -130,10 +130,10 @@ public class CoreTest extends TestCase {
         //reimpostiamo tutto :
         core = new Core();
 
-        instance_bowl = core.getActive().getBowls().get(3);
+        instance_bowl = core.getLast_active().getBowls().get(3);
 
         //core.user_action(instance_bowl);
-        core.move_seeds(instance_bowl);
+        core.user_action(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
         //     3 3 3 3 3 3
@@ -142,14 +142,14 @@ public class CoreTest extends TestCase {
         //verifichiamo
 
         //player attivo
-        assertEquals(3, core.getActive().getBowls().get(0).getNum_seeds());
-        assertEquals(3, core.getActive().getBowls().get(1).getNum_seeds());
-        assertEquals(3, core.getActive().getBowls().get(2).getNum_seeds());
-        assertEquals(0, core.getActive().getBowls().get(3).getNum_seeds());
-        assertEquals(4, core.getActive().getBowls().get(4).getNum_seeds());
-        assertEquals(4, core.getActive().getBowls().get(5).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(0).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(1).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(2).getNum_seeds());
+        assertEquals(0, core.getLast_active().getBowls().get(3).getNum_seeds());
+        assertEquals(4, core.getLast_active().getBowls().get(4).getNum_seeds());
+        assertEquals(4, core.getLast_active().getBowls().get(5).getNum_seeds());
 
-        assertEquals(1, core.getActive().getTray().getSeeds());
+        assertEquals(1, core.getLast_active().getTray().getSeeds());
 
         //opponente (non attivo)
         assertEquals(3, core.getPlayers().get(1).getBowls().get(0).getNum_seeds());
@@ -171,9 +171,9 @@ public class CoreTest extends TestCase {
         //     3 3 3 3 3 8
 
         core.getPlayers().get(0).getBowls().get(5).setNum_seeds(8);
-        instance_bowl = core.getActive().getBowls().get(5);
+        instance_bowl = core.getLast_active().getBowls().get(5);
 
-        core.move_seeds(instance_bowl);
+        core.user_action(instance_bowl);
 
         //eseguiamo la mossa e come risultato dobbiamo avere :
         //     4 4 4 4 4 4
@@ -182,14 +182,14 @@ public class CoreTest extends TestCase {
         //verifichiamo :
 
         //player attivo
-        assertEquals(4, core.getActive().getBowls().get(0).getNum_seeds());
-        assertEquals(3, core.getActive().getBowls().get(1).getNum_seeds());
-        assertEquals(3, core.getActive().getBowls().get(2).getNum_seeds());
-        assertEquals(3, core.getActive().getBowls().get(3).getNum_seeds());
-        assertEquals(3, core.getActive().getBowls().get(4).getNum_seeds());
-        assertEquals(0, core.getActive().getBowls().get(5).getNum_seeds());
+        assertEquals(4, core.getLast_active().getBowls().get(0).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(1).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(2).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(3).getNum_seeds());
+        assertEquals(3, core.getLast_active().getBowls().get(4).getNum_seeds());
+        assertEquals(0, core.getLast_active().getBowls().get(5).getNum_seeds());
 
-        assertEquals(1, core.getActive().getTray().getSeeds());
+        assertEquals(1, core.getLast_active().getTray().getSeeds());
 
         //opponente (non attivo)
         assertEquals(4, core.getPlayers().get(1).getBowls().get(0).getNum_seeds());

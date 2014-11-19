@@ -45,7 +45,7 @@ public class Core {
     }
 
 //METODI PRIVATI DELLA CLASSE
-    public Bowl move_seeds(Bowl bowl){
+    private Bowl move_seeds(Bowl bowl){
 
         //dichiariamo subito un oggetto bowl da ritornare
         Bowl return_bowl = null;
@@ -119,6 +119,7 @@ public class Core {
             players.add(new Player());
         }
         active = players.get(0);
+        last_active = active;
     }
 
 //GETTERS AND SETTERS
