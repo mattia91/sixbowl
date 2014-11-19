@@ -24,13 +24,15 @@ public class Rules {
  */
 
 
-    public void check_rules(Bowl last_bowl, Player active, ArrayList<Player> players, int game_mode){
+    public Player check_rules(Bowl last_bowl, Player active, ArrayList<Player> players, int game_mode){
 
         if( game_mode == 1){
             //attenzione, l'ordine è questo perché altrimenti rubo a me stesso o a un poveretto poiché ho già cambiato il turno
             steal_seeds(last_bowl, active, players);
-            keep_active(last_bowl, active, players);
+            return keep_active(last_bowl, active, players);
         }
+
+        return active;
 
     }
 
@@ -39,17 +41,19 @@ public class Rules {
 
 //DEFINIZIONE DELLE REGOLE, UNA PER UNA
 
-    private void keep_active(Bowl last_bowl, Player active, ArrayList<Player> players){
+    private Player keep_active(Bowl last_bowl, Player active, ArrayList<Player> players){
         //cambio del turno, questa macchinazione con il ciclo for serve per generalizzare il numero di giocatori da 2 a quanti ne voglio
         if( last_bowl != null ){
             for( int i = 1 ; i < Constant.number_player ; i++ ){
                 if( players.get(i-1).equals(active) ){
                     active = players.get(i);
                     //salta quello dopo/ esce dal ciclo se imposto l'ultimo come attivo
-                    i++;
+                    //i++;
+                    return active;
                 }
                 else if( i == Constant.number_player - 1 && players.get(i).equals(active)){
                     active = players.get(0);
+                    return active;
                 }
             }
         }
@@ -57,6 +61,8 @@ public class Rules {
         //if( last_bowl == null){
             //il player active resta active
         //}
+
+        return active;
     }
 
 

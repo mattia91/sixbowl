@@ -113,11 +113,12 @@ public class RulesTest extends TestCase {
         //    0           1
         //     3 3 3 3 0 4
 
-        set_situation(giocatore1,giocatore2,3,3,3,3,0,4,1,3,3,3,3,3,3,4);
+        set_situation(giocatore1,giocatore2,3,3,3,3,0,4,1,4,3,3,3,3,3,0);
 
-        rules.check_rules(giocatore2.getBowls().get(5),active,players,game_mode);
+        active = rules.check_rules(giocatore2.getBowls().get(5),active,players,game_mode);
 
-        assertEquals(active, players.get(1)); // verifico se viene cambiato il giocatore attivo
+        // verifico se viene cambiato il giocatore attivo
+        assertEquals(active, players.get(1));
         //player attivo
         assertEquals(3,giocatore1.getBowls().get(0).getNum_seeds());
         assertEquals(3,giocatore1.getBowls().get(1).getNum_seeds());
