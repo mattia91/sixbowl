@@ -1,7 +1,7 @@
 package com.example.mattia.testproject.Controller;
 
 import com.example.mattia.testproject.Model.Bowl;
-import com.example.mattia.testproject.Model.Constant;
+
 
 import junit.framework.TestCase;
 
@@ -9,12 +9,15 @@ public class CoreTest extends TestCase {
 
     Core core = new Core();
 
+
     public void test_move_seeds(){
 
         //iniziamo ad esempio dal mio terzo vaso, condizione iniziale tutti i vasi con 3 semi e tray vuoto
         Bowl instance_bowl = core.getActive().getBowls().get(2);
 
-        core.user_action(instance_bowl);
+       // core.user_action(instance_bowl);
+        core.move_seeds(instance_bowl);
+
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
         //     3 3 3 3 3 3
@@ -50,7 +53,8 @@ public class CoreTest extends TestCase {
         core.setActive(core.getPlayers().get(0));
         instance_bowl = core.getActive().getBowls().get(3);
 
-        core.user_action(instance_bowl);
+        //core.user_action(instance_bowl);
+        core.move_seeds(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
        //     3 3 3 3 3 4
@@ -85,7 +89,8 @@ public class CoreTest extends TestCase {
         core.setActive(core.getPlayers().get(0));
         instance_bowl = core.getActive().getBowls().get(3);
 
-        core.user_action(instance_bowl);
+        //core.user_action(instance_bowl);
+        core.move_seeds(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
         //     3 3 3 3 3 4
@@ -122,7 +127,8 @@ public class CoreTest extends TestCase {
 
         instance_bowl = core.getActive().getBowls().get(3);
 
-        core.user_action(instance_bowl);
+        //core.user_action(instance_bowl);
+        core.move_seeds(instance_bowl);
 
         //dopo la mossa appena compiuta mi aspetto questa situazione :
         //     3 3 3 3 3 3
@@ -154,6 +160,47 @@ public class CoreTest extends TestCase {
         assertEquals(core.getPlayers().get(0), core.getActive());
 
     }
+
+    public void test_check_rules( ){
+
+        core=new Core();
+
+        Bowl instance_bowl = core.getActive().getBowls().get(3);
+        core.move_seeds(instance_bowl);
+
+        //     3 3 3 3 3 3
+        //    0           1
+        //     3 3 3 0 4 4
+
+
+        // devo verificare che il numero di semi nel tray sia giusto
+        //che la bowl da cui ho rubato sia vuota
+        // e che il player active sia giusto
+
+        instance_bowl = core.getActive().getBowls().get(0);
+        Bowl last_bowl=core.move_seeds(instance_bowl);
+
+        //     3 3 3 3 3 3
+        //    0           1
+        //     0 4 4 1 4 4
+
+        core.check_rules(last_bowl);
+
+        //     3 3 3 0 3 3
+        //    0           5
+        //     0 4 4 0 4 4
+
+        assertEquals(5, core.getActive().getTray().getSeeds());
+        //assertEquals(0, core.getActive().getBowls().get(3).getNum_seeds());
+
+        assertEquals(core.getActive(),core.getPlayers().get(0));
+       /* assertEquals(0,core.getActive().getBowls().get(1).getNum_seeds());
+        assertEquals(0,core.getActive().getBowls().get(3).getNum_seeds());
+        assertEquals(0,core.getPlayers().get(1).getBowls().get(3).getNum_seeds()); */
+
+
+
+   }
 
 
 

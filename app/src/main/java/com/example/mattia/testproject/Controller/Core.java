@@ -36,10 +36,11 @@ public class Core {
         return null;
     }
 
-    private Bowl move_seeds(Bowl bowl){
+    public Bowl move_seeds(Bowl bowl){
 
         //dichiariamo subito un oggetto bowl da ritornare
         Bowl return_bowl = null;
+
         //salviamo il numero di semi che ha il vaso passato
         int seeds = bowl.getNum_seeds();
         //azzeriamo il numero di semi nel vaso toccato, come da regole
@@ -98,35 +99,56 @@ public class Core {
         return return_bowl;
     }
 
-    private void check_rules(Bowl last_bowl){
+    public void check_rules(Bowl last_bowl){
         if(last_bowl != null){
             //salvo la posizione (come intero) del vaso che ho toccato sullo schermo
             int bowls_pointer = 0;
-            for ( Bowl my_bowl : active.getBowls() ){
+           /* for ( Bowl my_bowl : active.getBowls() ){
                 if( my_bowl.equals(last_bowl) ){
                     bowls_pointer = active.getBowls().indexOf(my_bowl);
                 }
+            }*/
+
+            Player opponent;// = new Player();
+           /* for( int i = 0 ; i < Constant.number_player ; i++ ){
+                if( players.get(i).equals(active) && i + 1 < Constant.number_player){
+                    opponent = players.get(i+1);
+                }
+                else{
+                    opponent = players.get(0);
+                }
+            }*/
+
+            if(players.get(0).equals(active)){
+              opponent=players.get(1);
             }
-            if(!active.getBowls().contains(last_bowl)){
+            else{
+                opponent=players.get(0);
+            }
+
+            if(active.getBowls().contains(last_bowl)){
                 //se finisco in una MIA bowl vuota, rubo tutti i semi dell'avversario nella bowl simmetrica
+                bowls_pointer = active.getBowls().indexOf(last_bowl);
                 if(last_bowl.getNum_seeds() == 1){
                     //determino chi è inattivo
-                    Player opponent = new Player();
-                    for( int i = 0 ; i < Constant.number_player ; i++ ){
-                        if( players.get(i).equals(active) && i + 1 < Constant.number_player){
-                            opponent = players.get(i+1);
-                        }
-                        else{
-                            opponent = players.get(0);
-                        }
-                    }
+
                     //aggiorno il mio tray
                     active.increment_tray( opponent.getBowls().get(Constant.num_bowls - 1 - bowls_pointer).getNum_seeds() );
+                    active.increment_tray(last_bowl.getNum_seeds());
+                    //azzero il contenuto della mia last bowl
+                    last_bowl.setNum_seeds(0);
+                    //active.increment_tray( opponent.getBowls().get(bowls_pointer).getNum_seeds() );
+
                     //imposto la bowl da cui ho rubato a zero semi
                     opponent.getBowls().get(Constant.num_bowls - 1 - bowls_pointer).setNum_seeds(0);
+                    //opponent.getBowls().get(bowls_pointer).setNum_seeds(0);
+
                     //è ora di cambiare il turno
-                    active = opponent;
+                    // active = opponent;
                 }
+            }
+            else{
+                active=opponent;
             }
 
         }
