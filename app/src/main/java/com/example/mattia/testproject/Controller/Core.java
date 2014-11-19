@@ -45,7 +45,7 @@ public class Core {
     }
 
 //METODI PRIVATI DELLA CLASSE
-    private Bowl move_seeds(Bowl bowl){
+    public Bowl move_seeds(Bowl bowl){
 
         //dichiariamo subito un oggetto bowl da ritornare
         Bowl return_bowl = null;

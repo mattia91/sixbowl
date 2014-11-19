@@ -15,10 +15,13 @@ public class EndingRoutine {
     public int gameOver(Player last_active, ArrayList<Player> players){
         //controllo se il gioco è concluso
         boolean game_over =  is_over(last_active);
+        int winner=-1;
         //nel caso sia concluso procedo con la routine finale
-        arrange_remaining_seeds(players);
-        //stabilisco il vincitore
-        int winner = winner(players);
+      if (game_over) {
+          arrange_remaining_seeds(players);
+          //stabilisco il vincitore
+          winner = winner(players);
+      }
 
         //TODO aggiorna le statistiche
 
@@ -54,19 +57,25 @@ public class EndingRoutine {
 
         int winning = players.get(0).getTray().getSeeds();
         int return_value = -2;
+        boolean pare=true;  // <- ho aggiunto questa variabile
 
         //controlliamo se per caso è avvenuto un pareggio fra i giocatori
         for( int e = 0; e < Constant.number_player ; e++ ){
             //se la condizione sotto si verifica non è avvenuto pareggio
             if(players.get(e).getTray().getSeeds() != winning){
-                return_value = -1;
+                pare=false;  // <- al posto di return = -1;  uso la nuova variabile
             }
         }
+
         //stabiliamo il vincitore
-        for( int e = 0 ; e < Constant.number_player ; e++){
-            if (players.get(e).getTray().getSeeds() > winning ){
-                winning = players.get(e).getTray().getSeeds();
-                return_value = e;
+        // 0 se vince il primo
+        // 1 se vince il secondo
+        if(!pare) {  // se non ce stato pareggio entro nel ciclo e stabilisco vincitore
+            for (int e = 0; e < Constant.number_player; e++) {
+                if (players.get(e).getTray().getSeeds() >= winning) {  // qua ho modificato ho messo anche " = "; ci va per forza
+                    winning = players.get(e).getTray().getSeeds();
+                    return_value = e;
+                }
             }
         }
 
