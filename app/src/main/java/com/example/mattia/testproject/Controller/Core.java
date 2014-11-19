@@ -12,11 +12,15 @@ import java.util.ArrayList;
  */
 public class Core {
 
-
-
     private ArrayList<Player> players = new ArrayList<Player>();
-    //private Player players[];
     private Player active;
+    private Rules rules = new Rules();
+
+
+
+    //modalità di gioco, 1 indica modalità standard, si possono definire nuove regole, useremo altri numeri
+    private int game_mode = 1;
+
 
     public Core(){
         //players = new Player[Constant.number_player];
@@ -31,7 +35,7 @@ public class Core {
     public Bowl user_action(Bowl bowl){
         if( is_legal( bowl, active ) ){
             Bowl last_bowl = move_seeds(bowl);
-            check_rules(last_bowl);
+            rules.check_rules(last_bowl, active, players, game_mode);
         }
         return null;
     }
@@ -99,60 +103,7 @@ public class Core {
         return return_bowl;
     }
 
-    public void check_rules(Bowl last_bowl){
-        if(last_bowl != null){
-            //salvo la posizione (come intero) del vaso che ho toccato sullo schermo
-            int bowls_pointer = 0;
-           /* for ( Bowl my_bowl : active.getBowls() ){
-                if( my_bowl.equals(last_bowl) ){
-                    bowls_pointer = active.getBowls().indexOf(my_bowl);
-                }
-            }*/
 
-            Player opponent;// = new Player();
-           /* for( int i = 0 ; i < Constant.number_player ; i++ ){
-                if( players.get(i).equals(active) && i + 1 < Constant.number_player){
-                    opponent = players.get(i+1);
-                }
-                else{
-                    opponent = players.get(0);
-                }
-            }*/
-
-            if(players.get(0).equals(active)){
-              opponent=players.get(1);
-            }
-            else{
-                opponent=players.get(0);
-            }
-
-            if(active.getBowls().contains(last_bowl)){
-                //se finisco in una MIA bowl vuota, rubo tutti i semi dell'avversario nella bowl simmetrica
-                bowls_pointer = active.getBowls().indexOf(last_bowl);
-                if(last_bowl.getNum_seeds() == 1){
-                    //determino chi è inattivo
-
-                    //aggiorno il mio tray
-                    active.increment_tray( opponent.getBowls().get(Constant.num_bowls - 1 - bowls_pointer).getNum_seeds() );
-                    active.increment_tray(last_bowl.getNum_seeds());
-                    //azzero il contenuto della mia last bowl
-                    last_bowl.setNum_seeds(0);
-                    //active.increment_tray( opponent.getBowls().get(bowls_pointer).getNum_seeds() );
-
-                    //imposto la bowl da cui ho rubato a zero semi
-                    opponent.getBowls().get(Constant.num_bowls - 1 - bowls_pointer).setNum_seeds(0);
-                    //opponent.getBowls().get(bowls_pointer).setNum_seeds(0);
-
-                    //è ora di cambiare il turno
-                    // active = opponent;
-                }
-            }
-            else{
-                active=opponent;
-            }
-
-        }
-    }
 
     private boolean is_legal(Bowl bowl,Player player){
         if (bowl.getNum_seeds()==0) return false;
@@ -184,5 +135,19 @@ public class Core {
     public void setActive(Player active) {
         this.active = active;
     }
+    public Rules getRules() {
+        return rules;
+    }
 
+    public void setRules(Rules rules) {
+        this.rules = rules;
+    }
+
+    public int getGame_mode() {
+        return game_mode;
+    }
+
+    public void setGame_mode(int game_mode) {
+        this.game_mode = game_mode;
+    }
 }
