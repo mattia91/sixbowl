@@ -19,21 +19,19 @@ public class Rules {
     a quello su detto, appartenente all'avversario, vanno nel MIO tray : steal_seeds()
 
  */
-    public Player check_rules(Bowl last_bowl, Player active, ArrayList<Player> players, int game_mode){
 
+//METODI PUBBLICI DELLA CLASSE
+    public Player check_rules(Bowl last_bowl, Player active, ArrayList<Player> players, int game_mode){
         if( game_mode == 1){
             //attenzione, l'ordine è questo perché altrimenti rubo a me stesso o a un poveretto poiché ho già cambiato il turno
             steal_seeds(last_bowl, active, players);
             return keep_active(last_bowl, active, players);
         }
-
         return active;
-
     }
 
-
+//METODI PRIVATI DELLA CLASSE
 //DEFINIZIONE DELLE REGOLE, UNA PER UNA
-
     private Player keep_active(Bowl last_bowl, Player active, ArrayList<Player> players){
         //cambio del turno, questa macchinazione con il ciclo for serve per generalizzare il numero di giocatori da 2 a quanti ne voglio
         if( last_bowl != null ){
