@@ -25,6 +25,11 @@ public class RulesTest extends TestCase {
 
 
 
+        /*TODO : TEST DA ESEGUIRE : CONTROLLARE CHE IL TURNO VENGA CAMBIATO PASSANDO UN VASO,
+          CHE IL TURNO NON  VENGA CAMBIATO PASSANDO NULL E CHE I SEMI VENGANO RUBATI
+         */
+
+
         Bowl instance_bowl = core.getActive().getBowls().get(3);
         core.move_seeds(instance_bowl);
 
