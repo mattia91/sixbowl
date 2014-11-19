@@ -10,25 +10,21 @@ import java.util.ArrayList;
 
 public class RulesTest extends TestCase {
 
+    ArrayList<Player> players = new ArrayList<Player>();
+    Player giocatore1 = new Player();
+    Player giocatore2 = new Player();
+    Player active = giocatore1;
+    int game_mode = 1;
 
     public void test_check_rules( ){
+
+        players.add(giocatore1);
+        players.add(giocatore2);
 
         Rules rules = new Rules();
 
         //definizione delle variabili da passare al metodo per essere testato :
-        ArrayList<Player> players = new ArrayList<Player>();
-        Player giocatore1 = new Player();
-        Player giocatore2 = new Player();
-        Player active = giocatore1;
-        players.add(giocatore1);
-        players.add(giocatore2);
-        int game_mode = 1;
 
-
-
-        /*TODO : TEST DA ESEGUIRE : CONTROLLARE CHE IL TURNO VENGA CAMBIATO PASSANDO UN VASO,
-          CHE IL TURNO NON  VENGA CAMBIATO PASSANDO NULL E CHE I SEMI VENGANO RUBATI
-         */
 
 
 
@@ -38,7 +34,7 @@ public class RulesTest extends TestCase {
 
         // -------------------------   setto questa situazione  -----------------------------
 
-       set_situation(giocatore1,giocatore2,0,4,4,1,4,4,1,3,3,3,3,3,3,0);
+       set_situation(0,4,4,1,4,4,1,3,3,3,3,3,3,0);
 
        rules.check_rules(giocatore1.getBowls().get(3),active,players,game_mode);
      // -----------------------------------------------------------------------------------------------
@@ -47,7 +43,7 @@ public class RulesTest extends TestCase {
         //che la bowl da cui ho rubato sia vuota
         // e che il player active sia giusto
 
-        //     3 3 0 3 3 3
+        //     3 3 3 0 3 3
         //    0           5
         //     0 4 4 0 4 4
 
@@ -80,7 +76,7 @@ public class RulesTest extends TestCase {
         //     0 4 0 0 4 4
 
         active = giocatore1;
-        set_situation(giocatore1,giocatore2,0,4,0,0,4,4,1,3,3,0,3,3,3,0);
+        set_situation(0,4,0,0,4,4,1,3,3,3,0,3,3,0);
 
         rules.check_rules(null,active,players,game_mode);
 
@@ -98,8 +94,8 @@ public class RulesTest extends TestCase {
         //opponente (non attivo)
         assertEquals(3,giocatore2.getBowls().get(0).getNum_seeds());
         assertEquals(3,giocatore2.getBowls().get(1).getNum_seeds());
-        assertEquals(0,giocatore2.getBowls().get(2).getNum_seeds());
-        assertEquals(3,giocatore2.getBowls().get(3).getNum_seeds());
+        assertEquals(3,giocatore2.getBowls().get(2).getNum_seeds());
+        assertEquals(0,giocatore2.getBowls().get(3).getNum_seeds());
         assertEquals(3,giocatore2.getBowls().get(4).getNum_seeds());
         assertEquals(3,giocatore2.getBowls().get(5).getNum_seeds());
 
@@ -113,7 +109,7 @@ public class RulesTest extends TestCase {
         //    0           1
         //     3 3 3 3 0 4
 
-        set_situation(giocatore1,giocatore2,3,3,3,3,0,4,1,4,3,3,3,3,3,0);
+        set_situation(3,3,3,3,0,4,1,4,3,3,3,3,3,0);
 
         active = rules.check_rules(giocatore2.getBowls().get(5),active,players,game_mode);
 
@@ -130,12 +126,12 @@ public class RulesTest extends TestCase {
         assertEquals(1,giocatore1.getTray().getSeeds());
 
         //opponente (non attivo)
-        assertEquals(3,giocatore2.getBowls().get(0).getNum_seeds());
+        assertEquals(4,giocatore2.getBowls().get(0).getNum_seeds());
         assertEquals(3,giocatore2.getBowls().get(1).getNum_seeds());
         assertEquals(3,giocatore2.getBowls().get(2).getNum_seeds());
         assertEquals(3,giocatore2.getBowls().get(3).getNum_seeds());
         assertEquals(3,giocatore2.getBowls().get(4).getNum_seeds());
-        assertEquals(4,giocatore2.getBowls().get(5).getNum_seeds());
+        assertEquals(3,giocatore2.getBowls().get(5).getNum_seeds());
 
         assertEquals(0,giocatore2.getTray().getSeeds());
 
@@ -143,7 +139,7 @@ public class RulesTest extends TestCase {
      }
 
     // metodo privato per settare la configurazione
- private void set_situation(Player p1,Player p2,int b0,int b1,int b2 ,int b3,int b4, int b5, int t1, int b20, int b21, int b22, int b23, int b24, int b25, int t2){
+ private void set_situation(int b0,int b1,int b2 ,int b3,int b4, int b5, int t1, int b20, int b21, int b22, int b23, int b24, int b25, int t2){
 
      ArrayList<Bowl> bowls=new ArrayList<Bowl>();
      for(int i=0;i<6;i++){
@@ -160,8 +156,8 @@ public class RulesTest extends TestCase {
      Tray tray = new Tray();
      tray.setSeeds(t1);
 
-     p1.setBowls(bowls);
-     p1.setTray(tray);
+     giocatore1.setBowls(bowls);
+     giocatore1.setTray(tray);
 
      bowls=new ArrayList<Bowl>();
      for(int i=0;i<6;i++){
@@ -178,8 +174,8 @@ public class RulesTest extends TestCase {
      tray = new Tray();
      tray.setSeeds(t2);
 
-     p2.setBowls(bowls);
-     p2.setTray(tray);
+     giocatore2.setBowls(bowls);
+     giocatore2.setTray(tray);
  }
 
 

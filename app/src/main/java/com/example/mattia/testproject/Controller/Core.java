@@ -35,7 +35,7 @@ public class Core {
     public Bowl user_action(Bowl bowl){
         if( is_legal( bowl, active ) ){
             Bowl last_bowl = move_seeds(bowl);
-            rules.check_rules(last_bowl, active, players, game_mode);
+            active = rules.check_rules(last_bowl, active, players, game_mode);
         }
         return null;
     }
