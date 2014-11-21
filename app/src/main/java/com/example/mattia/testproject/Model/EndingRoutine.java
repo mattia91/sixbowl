@@ -1,4 +1,4 @@
-package com.example.mattia.testproject.Controller;
+package com.example.mattia.testproject.Model;
 
 import com.example.mattia.testproject.Model.Bowl;
 import com.example.mattia.testproject.Model.Constant;

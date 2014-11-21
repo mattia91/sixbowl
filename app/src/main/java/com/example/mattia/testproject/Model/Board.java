@@ -1,18 +1,13 @@
-package com.example.mattia.testproject.Controller;
-
-import com.example.mattia.testproject.Model.Bowl;
-import com.example.mattia.testproject.Model.Constant;
-import com.example.mattia.testproject.Model.Player;
+package com.example.mattia.testproject.Model;
 
 import java.util.ArrayList;
 
 /**
- * Created by mattia on 17/11/2014.
+ * Created by martino on 21/11/14.
  */
+public class Board {
 
-public class Core {
-
-//OGGETTI ISTANZIATI
+    //OGGETTI ISTANZIATI
     private ArrayList<Player> players = new ArrayList<Player>();
     private Player active;
     private Player last_active;
@@ -33,19 +28,8 @@ public class Core {
     private int game_mode = 1;
 
 
-//METODI PUBBLICI DELLA CLASSE
-    public Bowl user_action(Bowl bowl){
-        if( is_legal( bowl, active ) ){
-            last_active = active;
-            Bowl last_bowl = move_seeds(bowl);
-            active = rules.check_rules(last_bowl, active, players, game_mode);
-            end_of_game = game_over.gameOver(last_active, players);
-        }
-        return null;
-    }
-
-//METODI PRIVATI DELLA CLASSE
-    private Bowl move_seeds(Bowl bowl){
+    //METODI DELLA CLASSE
+    public Bowl move_seeds(Bowl bowl){
 
         //dichiariamo subito un oggetto bowl da ritornare
         Bowl return_bowl = null;
@@ -107,14 +91,14 @@ public class Core {
         }
         return return_bowl;
     }
-    private boolean is_legal(Bowl bowl,Player player){
+    public boolean is_legal(Bowl bowl,Player player){
         if (bowl.getNum_seeds()==0) return false;
         if (!player.getBowls().contains(bowl)) return false;
         return true;
     }
 
-//COSTRUTTORI
-    public Core(){
+    //COSTRUTTORI
+    public Board(){
         for( int e = 0 ; e < Constant.number_player ; e++ ){
             players.add(new Player());
         }
@@ -122,9 +106,10 @@ public class Core {
         last_active = active;
     }
 
-//GETTERS AND SETTERS
+
+    //GETTERS AND SETTERS
     public ArrayList<Player> getPlayers() {
-    return players;
+        return players;
     }
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
@@ -150,27 +135,21 @@ public class Core {
     public void setLast_active(Player last_active) {
         this.last_active = last_active;
     }
-
     public Player getWinner() {
         return winner;
     }
-
     public void setWinner(Player winner) {
         this.winner = winner;
     }
-
     public EndingRoutine getGame_over() {
         return game_over;
     }
-
     public void setGame_over(EndingRoutine game_over) {
         this.game_over = game_over;
     }
-
     public int getEnd_of_game() {
         return end_of_game;
     }
-
     public void setEnd_of_game(int end_of_game) {
         this.end_of_game = end_of_game;
     }

@@ -1,7 +1,8 @@
-package com.example.mattia.testproject.Controller;
+package com.example.mattia.testproject.Model;
 
 import com.example.mattia.testproject.Model.Bowl;
 import com.example.mattia.testproject.Model.Player;
+import com.example.mattia.testproject.Model.Rules;
 import com.example.mattia.testproject.Model.Tray;
 
 import junit.framework.TestCase;
