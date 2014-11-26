@@ -63,7 +63,7 @@ public class MainActivity extends Activity implements OnClickListener {
         // creo secondo tray
         button = new Button(this);
         i=6;
-        button.setId(i + 2);
+        button.setId(i + 1);
         button.setEnabled(false);
         button.setText("0");
         tableRow.addView(button, 5);
