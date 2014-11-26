@@ -44,7 +44,8 @@ public class CoreActivity {
         }
         else if((i>=8) && (i<=13)){
 
-            bowltemp = board.getPlayers().get(1).getBowls().get(i);
+           bowltemp = board.getPlayers().get(1).getBowls().get(i-8);
+
         }
 
         bowltemp = user_action(bowltemp);
@@ -62,12 +63,15 @@ public class CoreActivity {
         for(int i=0;i<8;i++) {
             Button b = (Button) mainActivity.findViewById(i);
 
-            if(i==6)
+            if(i==6) {
                 b.setText(Integer.toString(board.getPlayers().get(0).getTray().getSeeds()));
-            if (i==7)
+            }
+            else if (i==7) {
                 b.setText(Integer.toString(board.getPlayers().get(1).getTray().getSeeds()));
-
-            b.setText(Integer.toString(board.getPlayers().get(0).getBowls().get(5-i).getNum_seeds()));
+            }
+            else {
+                 b.setText(Integer.toString(board.getPlayers().get(0).getBowls().get(i).getNum_seeds()));
+            }
         }
 
       // aggiorno il Text degli altri sei

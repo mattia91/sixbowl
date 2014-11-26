@@ -37,10 +37,10 @@ public class MainActivity extends Activity implements OnClickListener {
         int i = 0;
         for (; i < 6; i++) {
             Button button = new Button(this);  // creo il bottone che va nella prima cella dell aprima riga
-            button.setId(i);
+            button.setId(5-i);
             button.setOnClickListener(this);
             button.setText("3");
-            tableRow.addView(button);  // aggiungo il bottone alla riga
+            tableRow.addView(button,i);  // aggiungo il bottone alla riga
         }
         tableLayout.addView(tableRow); // aggiungo la riga alla tabella
 
@@ -73,9 +73,9 @@ public class MainActivity extends Activity implements OnClickListener {
         for (i = 0; i < 6; i++) {
             button = new Button(this);  // creo il bottone che va nella prima cella dell aprima riga
             button.setOnClickListener(this);
-            button.setId(i + 8);
+            button.setId(i+8);
             button.setText("3");
-            tableRow.addView(button);  // aggiungo il bottone alla riga
+            tableRow.addView(button,i);  // aggiungo il bottone alla riga
         }
         tableLayout.addView(tableRow); // aggiungo la riga alla tabella
 
