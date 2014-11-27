@@ -33,9 +33,6 @@ public class RulesTest extends TestCase {
 
         //definizione delle variabili da passare al metodo per essere testato :
 
-
-
-
         //     3 3 3 3 3 3
         //    0           1
         //     0 4 4 1 4 4
@@ -76,7 +73,7 @@ public class RulesTest extends TestCase {
 
         assertEquals(0,giocatore2.getTray().getSeeds());
   // --------------------------------------------------------------------------------------------------------------------------
-      // secondo test :  finiamo nel nostro try; passo null; devo restare lo stesso giocatore attivo
+      // secondo test :  finiamo nel nostro tray; passo null; devo restare lo stesso giocatore attivo
 
 
         //     3 3 0 3 3 3

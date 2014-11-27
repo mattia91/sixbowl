@@ -1,9 +1,4 @@
 package com.example.mattia.testproject.Model;
-
-import com.example.mattia.testproject.Model.Bowl;
-import com.example.mattia.testproject.Model.Constant;
-import com.example.mattia.testproject.Model.Player;
-
 import java.util.ArrayList;
 
 /**
@@ -71,5 +66,4 @@ public class Rules {
             }
         }
     }
-
 }
