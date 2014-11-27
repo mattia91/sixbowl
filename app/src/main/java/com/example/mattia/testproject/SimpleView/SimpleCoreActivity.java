@@ -1,6 +1,7 @@
 package com.example.mattia.testproject.SimpleView;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,10 +28,10 @@ public class SimpleCoreActivity extends Activity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         LinearLayout linLayout = new LinearLayout(this);
-        linLayout.setOrientation(LinearLayout.VERTICAL);
+        linLayout.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams linLayoutParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        setContentView(linLayout, linLayoutParam);
         TableLayout tableLayout = new TableLayout(this);  // creo il layout della tabella
         TableRow tableRow = new TableRow(this);  // creo la prima riga della tabella
 
@@ -95,12 +96,19 @@ public class SimpleCoreActivity extends Activity implements View.OnClickListener
         tableRow.addView(giocatore1);
         tableLayout.addView(tableRow);
 
-        // -----------------------------------------------------------------------------------------------------------------------------------------------
-        RelativeLayout.LayoutParams centerTableParameters = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        centerTableParameters.addRule(RelativeLayout.CENTER_IN_PARENT);
-        linLayout.addView(tableLayout, centerTableParameters);
-        setContentView(linLayout);
+        tableRow = new TableRow(this);
+        TextView winner = new TextView(this);
+        winner.setId(16);
+        winner.setText("in corso");
+        tableRow.addView(winner);
+        tableLayout.addView(tableRow);
 
+        // -----------------------------------------------------------------------------------------------------------------------------------------------
+        //RelativeLayout.LayoutParams centerTableParameters = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        //centerTableParameters.addRule(RelativeLayout.CENTER_IN_PARENT);
+        //linLayout.addView(tableLayout, centerTableParameters);
+        linLayout.addView(tableLayout);
+        setContentView(linLayout, linLayoutParam);
     }
 
     public Bowl user_action(Bowl bowl){
@@ -143,6 +151,16 @@ public class SimpleCoreActivity extends Activity implements View.OnClickListener
         else if(board.getActive().equals(board.getPlayers().get(1))){
             player2.setBackgroundColor(Color.YELLOW);
             player1.setBackgroundColor(Color.WHITE);
+        }
+
+
+        if( board.getEnd_of_game() != -1){
+            TextView winner = (TextView) this.findViewById(16);
+            switch(board.getEnd_of_game()){
+                case 0 : winner.setText("ha vinto il player 1"); break;
+                case 1 : winner.setText("ha vinto il player 2"); break;
+                default: winner.setText("il gioco si è concluso in pareggio"); break;
+            }
         }
 
 
