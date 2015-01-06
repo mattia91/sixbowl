@@ -7,36 +7,16 @@ import java.util.ArrayList;
  */
 public class Player {
 
-    private ArrayList<Bowl> bowls= new ArrayList<Bowl>();
-    private Tray tray;
-    private String name = new String();
-
-
-   public Player(){
-
-       for(int i = 0 ; i < Constant.num_bowls ; i++) {
-          bowls.add(new Bowl());
-       }
-       tray=new Tray();
-   }
-
-    public ArrayList<Bowl> getBowls() {
-        return bowls;
+    public int getTurn_identifier() {
+        return turn_identifier;
     }
 
-    public void setBowls(ArrayList<Bowl> bowls) {
-        this.bowls = bowls;
+    private int turn_identifier;
+
+    public Player(int turn_identifier){
+        this.turn_identifier = turn_identifier;
     }
 
-    public Tray getTray() {
-        return tray;
-    }
 
-    public void setTray(Tray tray) {
-        this.tray = tray;
-    }
 
-    public void increment_tray(int amount){
-        this.tray.setSeeds(this.tray.getSeeds()+amount);
-    }
 }

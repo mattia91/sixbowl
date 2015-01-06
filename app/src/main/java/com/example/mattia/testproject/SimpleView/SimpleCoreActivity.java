@@ -7,16 +7,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import com.example.mattia.testproject.Model.Bowl;
 import com.example.mattia.testproject.R;
-import com.example.mattia.testproject.Model.Board;
+
 /**
  * Created by martino on 27/11/14.
  */

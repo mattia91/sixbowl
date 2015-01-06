@@ -3,7 +3,7 @@ package com.example.mattia.testproject.Model;
 /**
  * Created by mattia on 17/11/2014.
  */
-public class Constant {
+public class Constants {
 
     public static int seeds_initial_bowls=3;
     public static int seeds_initial_tray=0;

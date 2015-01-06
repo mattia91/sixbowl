@@ -3,19 +3,34 @@ package com.example.mattia.testproject.Model;
 /**
  * Created by mattia on 17/11/2014.
  */
-public class Bowl {
+public class Bowl implements Bowl_interface{
 
-    private int num_seeds=Constant.seeds_initial_bowls;
+    private int num_seeds;
 
-    public int getNum_seeds() {
-        return num_seeds;
+    public int getBowl_identifier() {
+        return bowl_identifier;
     }
 
-    public void setNum_seeds(int num_seeds) {
+    private int bowl_identifier;
+    //= Constants.seeds_initial_bowls;
+
+    public Bowl(int num_seeds, int bowl_identifier)
+    {
+        this.bowl_identifier = bowl_identifier;
         this.num_seeds = num_seeds;
     }
 
-    public void increment(int amount){
-        this.num_seeds += amount;
+    @Override
+    public void increment_seed_count(int amount) {
+        num_seeds += amount;
+    }
+
+    @Override
+    public void remove_whole_content() {
+        num_seeds = 0;
+    }
+
+    public int getNum_seeds() {
+        return num_seeds;
     }
 }
