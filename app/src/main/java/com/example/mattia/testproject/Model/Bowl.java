@@ -3,9 +3,7 @@ package com.example.mattia.testproject.Model;
 /**
  * Created by mattia on 17/11/2014.
  */
-public class Bowl implements Bowl_interface{
-
-    private int num_seeds;
+public class Bowl extends Bowl_abstract {
 
     public int getBowl_identifier() {
         return bowl_identifier;

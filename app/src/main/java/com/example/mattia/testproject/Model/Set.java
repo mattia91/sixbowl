@@ -8,18 +8,9 @@ import java.util.ArrayList;
  * and has the method for the "seeding" move within itself (so not passing through other players' sets)
  *
  */
-public class Set implements Set_interface {
+public class Set extends Set_abstract {
 
-    private Player player;
-    protected ArrayList<Bowl> bowls;
-    protected Tray tray;
-    int seeds_moving;
-    protected boolean is_active;
-    private boolean will_be_active = false;
-    protected int last_bowl_filled_id = -1;
-
-
-    public Set(Player player,int active_identifier, ArrayList<Bowl> bowls, Tray tray, boolean is_active ){
+    public Set(Player player, ArrayList<Bowl_abstract> bowls, Tray tray, boolean is_active ){
         this.bowls = bowls;
         this.player = player;
         this.tray = tray;
@@ -41,14 +32,14 @@ public class Set implements Set_interface {
         //if : is this the set of the active player (the one who chose the move) ?
         if( is_active ){
             //let's pick up the whole content of the selected bowl
-            for(Bowl bowl : this.bowls){
+            for(Bowl_abstract bowl : this.bowls){
                 if( bowl.getBowl_identifier() == bowl_identifier ){
                     this.seeds_moving = bowl.getNum_seeds();
                     bowl.remove_whole_content();
                 }
             }
             //and drop it in the NEXT bowls
-            for(Bowl bowl : this.bowls){
+            for(Bowl_abstract bowl : this.bowls){
                 if( bowl.getBowl_identifier() > bowl_identifier && seeds_moving > 0){
                     bowl.increment_seed_count(1);
                     this.seeds_moving -= 1;
@@ -68,7 +59,7 @@ public class Set implements Set_interface {
         //otherwise this is the set of the inactive player, in this case the value seeds_moving come from a past method
         else{
             //let's drop the seeds in the bowls
-            for(Bowl bowl : this.bowls){
+            for(Bowl_abstract bowl : this.bowls){
                 if( bowl.getBowl_identifier() >= bowl_identifier && seeds_moving > 0){
                     bowl.increment_seed_count(1);
                     this.seeds_moving -= 1;
